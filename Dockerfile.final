@@ -1,0 +1,11 @@
+FROM busybox
+
+ADD rusty-oauth /usr/bin/rusty-oauth
+
+RUN chmod +x /usr/bin/rusty-oauth
+
+ENV RUST_LOG debug
+
+EXPOSE 8080
+
+ENTRYPOINT ["/usr/bin/rusty-oauth"]

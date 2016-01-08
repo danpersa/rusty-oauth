@@ -1,0 +1,15 @@
+# this is a slightly bigger busybox, but you comes with the opkg pagkage manager
+# useful for bashing into the machine for debugging
+FROM progrium/busybox
+
+RUN opkg-install curl bash
+
+ADD rusty-oauth /usr/bin/rusty-oauth
+
+RUN chmod +x /usr/bin/rusty-oauth
+
+ENV RUST_LOG debug
+
+EXPOSE 8080
+
+ENTRYPOINT ["/usr/bin/rusty-oauth"]

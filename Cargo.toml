@@ -1,0 +1,9 @@
+[package]
+name = "rusty-oauth"
+version = "0.1.0"
+authors = ["Dan Persa <dan.persa@gmail.com>"]
+
+[dependencies]
+nickel = "*"
+rustc-serialize = "*"
+log = "*"
