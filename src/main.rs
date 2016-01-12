@@ -17,6 +17,7 @@ fn invalid_request<S: Into<String>>(err: S) -> String {
 
 fn main() {
     let mut server = Nickel::new();
+    info!("Start rusty-oauth");
 
     server.get("/oauth2/tokeninfo", middleware! { |req, mut res|
         res.set(MediaType::Json);
@@ -28,6 +29,8 @@ fn main() {
             }
         };
 
+        info!("Request token: {:?}", token);
+
         let token_info = match TokenInfo::from_query_param(&token) {
             Ok(token_info) => token_info,
             Err(err) => {
@@ -36,8 +39,9 @@ fn main() {
             }
         };
 
+        info!("Token info: {:?}", token_info);
         json::encode(&token_info).unwrap()
     });
 
-    server.listen("0.0.0.0:8080");
+    server.listen("0.0.0.0:6767");
 }

@@ -9,16 +9,16 @@ pub type Scope = String;
 
 pub type Realm = String;
 
-#[derive(RustcDecodable, RustcEncodable)]
+#[derive(RustcDecodable, RustcEncodable, Debug)]
 pub struct TokenInfo {
-    scopes: Vec<Scope>,
+    scope: Vec<Scope>,
     realm: Realm
 }
 
 impl TokenInfo {
     fn new(scopes: Vec<&str>, realm: &str) -> TokenInfo {
         let s = scopes.iter().map(|s| s.to_string()).collect();
-        TokenInfo { scopes: s, realm: realm.to_string() }
+        TokenInfo { scope: s, realm: realm.to_string() }
     }
 
     pub fn from_query_param(param: &str) -> Result<TokenInfo, String> {

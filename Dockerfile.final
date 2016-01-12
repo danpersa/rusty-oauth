@@ -6,6 +6,6 @@ RUN chmod +x /usr/bin/rusty-oauth
 
 ENV RUST_LOG debug
 
-EXPOSE 8080
+EXPOSE 6767
 
 ENTRYPOINT ["/usr/bin/rusty-oauth"]
