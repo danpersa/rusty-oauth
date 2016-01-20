@@ -7,3 +7,4 @@ authors = ["Dan Persa <dan.persa@gmail.com>"]
 nickel = "*"
 rustc-serialize = "*"
 log = "*"
+env_logger = "*"

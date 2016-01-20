@@ -1,13 +1,4 @@
-FROM andrewd/rust-musl
-
-RUN apt-get update && \
-    BUILD_DEPENDENCIES="\
-        curl" && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -yy gcc $BUILD_DEPENDENCIES
-
-RUN curl -sSL -O https://get.docker.com/builds/Linux/x86_64/docker-1.9.1 && \
-    chmod +x docker-1.9.1 && \
-    mv docker-1.9.1 /usr/local/bin/docker
+FROM zalando/rusty-oauth-build-base
 
 ADD . /rusty-oauth
 WORKDIR /rusty-oauth

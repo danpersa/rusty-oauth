@@ -1,5 +1,6 @@
 extern crate rustc_serialize;
 #[macro_use] extern crate log;
+extern crate env_logger;
 #[macro_use] extern crate nickel;
 
 mod token_info;
@@ -16,8 +17,10 @@ fn invalid_request<S: Into<String>>(err: S) -> String {
 }
 
 fn main() {
+    env_logger::init().unwrap();
+
     let mut server = Nickel::new();
-    info!("Start rusty-oauth");
+    info!("Welcome to rusty-oauth");
 
     server.get("/oauth2/tokeninfo", middleware! { |req, mut res|
         res.set(MediaType::Json);
@@ -29,7 +32,7 @@ fn main() {
             }
         };
 
-        info!("Request token: {:?}", token);
+        debug!("Request token: {:?}", token);
 
         let token_info = match TokenInfo::from_query_param(&token) {
             Ok(token_info) => token_info,
@@ -39,7 +42,7 @@ fn main() {
             }
         };
 
-        info!("Token info: {:?}", token_info);
+        debug!("Token info: {:?}", token_info);
         json::encode(&token_info).unwrap()
     });
 
