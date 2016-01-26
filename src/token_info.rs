@@ -54,26 +54,26 @@ mod tests {
     #[test]
     fn token_info_to_json_test() {
         let token_info = &TokenInfo {
-            scopes: vec!["read".to_string(), "write".to_string()],
+            scope: vec!["read".to_string(), "write".to_string()],
             realm: "/employees".to_string()
         };
-        assert_eq!("{\"scopes\":[\"read\",\"write\"],\"realm\":\"/employees\"}", json::encode(token_info).unwrap());
+        assert_eq!("{\"scope\":[\"read\",\"write\"],\"realm\":\"/employees\"}", json::encode(token_info).unwrap());
     }
 
     #[test]
     fn token_info_new_test() {
         let token_info = &TokenInfo::new(vec!["read", "write"], "/employees");
-        assert_eq!("{\"scopes\":[\"read\",\"write\"],\"realm\":\"/employees\"}", json::encode(token_info).unwrap());
+        assert_eq!("{\"scope\":[\"read\",\"write\"],\"realm\":\"/employees\"}", json::encode(token_info).unwrap());
     }
 
     #[test]
     fn token_info_from_token_param_success_test() {
         let token_info = &TokenInfo::from_query_param("token-/employees-read-write").unwrap();
-        assert_eq!("{\"scopes\":[\"read\",\"write\"],\"realm\":\"/employees\"}", json::encode(token_info).unwrap());
+        assert_eq!("{\"scope\":[\"read\",\"write\"],\"realm\":\"/employees\"}", json::encode(token_info).unwrap());
         let token_info = &TokenInfo::from_query_param("token-/employees").unwrap();
-        assert_eq!("{\"scopes\":[],\"realm\":\"/employees\"}", json::encode(token_info).unwrap());
+        assert_eq!("{\"scope\":[],\"realm\":\"/employees\"}", json::encode(token_info).unwrap());
         let token_info = &TokenInfo::from_query_param("token-").unwrap();
-        assert_eq!("{\"scopes\":[],\"realm\":\"\"}", json::encode(token_info).unwrap());
+        assert_eq!("{\"scope\":[],\"realm\":\"\"}", json::encode(token_info).unwrap());
     }
 
     #[test]
