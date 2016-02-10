@@ -1,11 +1,11 @@
 default:
 	set -xe
-	docker build --rm -t zalando/rusty-oauth-build .
+	docker build --rm -f docker/Dockerfile -t zalando/rusty-oauth-build .
 	docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -ti zalando/rusty-oauth-build
 
 # run this as soon as you add, remove or modify one of the dependencies of the project
 build-base-image:
-	docker build -f Dockerfile.base --rm -t zalando/rusty-oauth-build-base .
+	docker build -f docker/Dockerfile.base --rm -t zalando/rusty-oauth-build-base .
 
 build-all: build-base-image default
 
